@@ -91,7 +91,7 @@ public class Homework2Activity extends Activity {
 		return isValid;
 	}
 	
-	public Boolean checkMatchGeneric(Integer etId1, Integer etId2, Integer tvId1, Integer tvId2) {
+	public Boolean checkMatchGeneric(int etId1, int etId2, int tvId1, int tvId2) {
 		EditText et1 = (EditText) findViewById(etId1),
 				 et2 = (EditText) findViewById(etId2);
 		TextView tv1 = (TextView) findViewById(tvId1),
@@ -109,7 +109,11 @@ public class Homework2Activity extends Activity {
 	}
 
 	public Boolean checkForm() {				
-		return checkMatchGeneric(R.id.email, R.id.email2, R.id.tv_email, R.id.tv_email2)
-			   && checkMatchGeneric(R.id.password, R.id.password2, R.id.tv_password, R.id.tv_password2);
+		Boolean goodEmail,
+				goodPassword;
+		goodEmail = checkMatchGeneric(R.id.email, R.id.email2, R.id.tv_email, R.id.tv_email2);
+		goodPassword = checkMatchGeneric(R.id.password, R.id.password2, R.id.tv_password, R.id.tv_password2);
+		
+		return goodEmail && goodPassword;
 	}
 }
