@@ -30,7 +30,7 @@ public class Homework2Activity extends Activity {
 		TvEtDict.put(R.id.username, R.id.tv_username);
 		TvEtDict.put(R.id.password, R.id.tv_password);
 		TvEtDict.put(R.id.password2, R.id.tv_password2);
-		
+
 		EditText field;
 		TextView label;
 		for (Map.Entry<Integer, Integer> entry : TvEtDict.entrySet()) {
@@ -39,11 +39,13 @@ public class Homework2Activity extends Activity {
 			label = (TextView) findViewById(entry.getValue());
 			label.setTextColor(Color.LTGRAY);
 		}
-		
+
 		RadioGroup gender = (RadioGroup) findViewById(R.id.genderGroup);
 		gender.clearCheck();
+		label = (TextView) findViewById(R.id.tv_gender);
+		label.setTextColor(Color.LTGRAY);
 	}
-	
+
 	public void submit(View v) {
 		if (checkForm()) {
 			Toast.makeText(this, "Informaton saved to the database successfully.", Toast.LENGTH_LONG).show();
@@ -51,7 +53,7 @@ public class Homework2Activity extends Activity {
 			Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
 		}
 	}
-	
+
 	public Boolean checkEmptyFields()
 	{
 		Boolean isValid = true;
@@ -64,7 +66,7 @@ public class Homework2Activity extends Activity {
 		TvEtDict.put(R.id.username, R.id.tv_username);
 		TvEtDict.put(R.id.password, R.id.tv_password);
 		TvEtDict.put(R.id.password2, R.id.tv_password2);
-		
+
 		EditText field;
 		TextView label;
 		for (Map.Entry<Integer, Integer> entry : TvEtDict.entrySet()) {
@@ -77,7 +79,7 @@ public class Homework2Activity extends Activity {
 				label.setTextColor(Color.LTGRAY);
 			}
 		}
-		
+
 		RadioGroup gender = (RadioGroup) findViewById(R.id.genderGroup);
 		label = (TextView) findViewById(R.id.tv_gender);
 		if (gender.getCheckedRadioButtonId() == -1) {
@@ -85,17 +87,17 @@ public class Homework2Activity extends Activity {
 		} else {
 			label.setTextColor(Color.LTGRAY);
 		}
-		
+
 		return isValid;
 	}
 	
-	public Boolean checkMatch(int id1, int id2, int tvId1, int tvId2) {
-		EditText et1 = (EditText) findViewById(id1),
-				 et2 = (EditText) findViewById(id2);
+	public Boolean checkMatchGeneric(Integer etId1, Integer etId2, Integer tvId1, Integer tvId2) {
+		EditText et1 = (EditText) findViewById(etId1),
+				 et2 = (EditText) findViewById(etId2);
 		TextView tv1 = (TextView) findViewById(tvId1),
 				 tv2 = (TextView) findViewById(tvId2);
 
-		if (et1.getText().toString() == et2.getText().toString()) {
+		if (et1.getText().toString().equals(et2.getText().toString())) {
 			tv1.setTextColor(Color.LTGRAY);
 			tv2.setTextColor(Color.LTGRAY);
 			return true;
@@ -105,9 +107,9 @@ public class Homework2Activity extends Activity {
 			return false;
 		}
 	}
-	
+
 	public Boolean checkForm() {				
-		return checkEmptyFields() && checkMatch(R.id.email, R.id.email2, R.id.tv_email, R.id.tv_email2)
-			   && checkMatch(R.id.password, R.id.password2, R.id.tv_password, R.id.tv_password2);
+		return checkMatchGeneric(R.id.email, R.id.email2, R.id.tv_email, R.id.tv_email2)
+			   && checkMatchGeneric(R.id.password, R.id.password2, R.id.tv_password, R.id.tv_password2);
 	}
 }
