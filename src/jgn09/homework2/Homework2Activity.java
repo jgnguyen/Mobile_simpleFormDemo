@@ -110,10 +110,12 @@ public class Homework2Activity extends Activity {
 
 	public Boolean checkForm() {				
 		Boolean goodEmail,
-				goodPassword;
+				goodPassword,
+				completeForm;
 		goodEmail = checkMatchGeneric(R.id.email, R.id.email2, R.id.tv_email, R.id.tv_email2);
 		goodPassword = checkMatchGeneric(R.id.password, R.id.password2, R.id.tv_password, R.id.tv_password2);
+		completeForm = checkEmptyFields();
 		
-		return goodEmail && goodPassword;
+		return goodEmail && goodPassword && completeForm;
 	}
 }
