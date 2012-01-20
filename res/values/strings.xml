@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Homework2</string>
+    <string name="fname">First Name</string>
+    <string name="lname">Last Name</string>
+    <string name="phone">Phone Number</string>
+    <string name="email">Email Address</string>
+    <string name="email2">Re-enter Email</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="password2">Re-enter Password</string>
+    <string name="gender">Gender</string>
+    <string name="genderOp1">Male</string>
+    <string name="genderOp2">Female</string>
+    <string name="submit">Submit</string>
+    <string name="clear">Clear</string>
+    <string-array name="usernames">
+        <item>Bryan</item>
+        <item>John</item>
+        <item>Matt</item>
+        <item>Mike</item>
+    </string-array>
+
+</resources>
