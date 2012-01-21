@@ -48,9 +48,9 @@ public class Homework2Activity extends Activity {
 
 	public void submit(View v) {
 		if (checkForm()) {
-			Toast.makeText(this, "Informaton saved to the database successfully.", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Informaton saved to the database successfully.", Toast.LENGTH_SHORT).show();
 		} else {
-			Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -97,7 +97,9 @@ public class Homework2Activity extends Activity {
 		TextView tv1 = (TextView) findViewById(tvId1),
 				 tv2 = (TextView) findViewById(tvId2);
 
-		if (et1.getText().toString().equals(et2.getText().toString())) {
+		if (et1.getText().toString().equals(et2.getText().toString())
+			&& et1.getText().toString().length() != 0
+			&& et2.getText().toString().length() != 0) {
 			tv1.setTextColor(Color.LTGRAY);
 			tv2.setTextColor(Color.LTGRAY);
 			return true;
@@ -112,9 +114,9 @@ public class Homework2Activity extends Activity {
 		Boolean goodEmail,
 				goodPassword,
 				completeForm;
+		completeForm = checkEmptyFields();
 		goodEmail = checkMatchGeneric(R.id.email, R.id.email2, R.id.tv_email, R.id.tv_email2);
 		goodPassword = checkMatchGeneric(R.id.password, R.id.password2, R.id.tv_password, R.id.tv_password2);
-		completeForm = checkEmptyFields();
 		
 		return goodEmail && goodPassword && completeForm;
 	}
