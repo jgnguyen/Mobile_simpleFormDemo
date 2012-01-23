@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +19,13 @@ public class Homework2Activity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.table);
+		
+		int orientation = getResources().getConfiguration().orientation;
+		Resources.getSystem().getConfiguration();
+		if (orientation == Configuration.ORIENTATION_LANDSCAPE)
+			setContentView(R.layout.table_land);
+		else
+			setContentView(R.layout.linear);
 	}
 
 	public void clearAll(View v) {
@@ -49,9 +57,7 @@ public class Homework2Activity extends Activity {
 	public void submit(View v) {
 		if (checkForm()) {
 			Toast.makeText(this, "Informaton saved to the database successfully.", Toast.LENGTH_SHORT).show();
-		} else {
-			Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-		}
+		} 
 	}
 
 	public Boolean checkEmptyFields()
@@ -90,16 +96,16 @@ public class Homework2Activity extends Activity {
 
 		return isValid;
 	}
-	
+
 	public Boolean checkMatchGeneric(int etId1, int etId2, int tvId1, int tvId2) {
 		EditText et1 = (EditText) findViewById(etId1),
-				 et2 = (EditText) findViewById(etId2);
+				et2 = (EditText) findViewById(etId2);
 		TextView tv1 = (TextView) findViewById(tvId1),
-				 tv2 = (TextView) findViewById(tvId2);
+				tv2 = (TextView) findViewById(tvId2);
 
 		if (et1.getText().toString().equals(et2.getText().toString())
-			&& et1.getText().toString().length() != 0
-			&& et2.getText().toString().length() != 0) {
+				&& et1.getText().toString().length() != 0
+				&& et2.getText().toString().length() != 0) {
 			tv1.setTextColor(Color.LTGRAY);
 			tv2.setTextColor(Color.LTGRAY);
 			return true;
@@ -110,14 +116,40 @@ public class Homework2Activity extends Activity {
 		}
 	}
 
+	public Boolean checkDuplicateName() {
+		EditText etName = (EditText) findViewById(R.id.username);
+		TextView tvName = (TextView) findViewById(R.id.tv_username);
+		Resources res = getResources();
+		String[] names = res.getStringArray(R.array.usernames);
+		String inName = etName.getText().toString();
+
+		if (inName.length() == 0) {
+			tvName.setTextColor(Color.RED);
+			return false;
+		}
+
+		for (String name : names) {
+			if (name.toLowerCase().equals(inName.toLowerCase())) {
+				tvName.setTextColor(Color.RED);
+				return false;
+			}
+		}
+
+		tvName.setTextColor(Color.LTGRAY);
+
+		return true;
+	}
+
 	public Boolean checkForm() {				
 		Boolean goodEmail,
-				goodPassword,
-				completeForm;
+		goodPassword,
+		completeForm,
+		goodName;
 		completeForm = checkEmptyFields();
 		goodEmail = checkMatchGeneric(R.id.email, R.id.email2, R.id.tv_email, R.id.tv_email2);
 		goodPassword = checkMatchGeneric(R.id.password, R.id.password2, R.id.tv_password, R.id.tv_password2);
-		
-		return goodEmail && goodPassword && completeForm;
+		goodName = checkDuplicateName();
+
+		return goodEmail && goodPassword && completeForm && goodName;
 	}
 }
